@@ -39,17 +39,17 @@ Note.create!([{
 Section.create!([{
   id: 1,
   text: "Family Trauma",
-  notes_id: 1
+  note_id: 1
 },
 {
   id: 2,
   text: "Friend Notes",
-  notes_id: 2
+  note_id: 2
 },
 {
   id: 3,
-  title: "Context",
-  notes_id: 3
+  text: "Context",
+  note_id: 1
 }
 ])
 
