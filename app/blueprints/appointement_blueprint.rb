@@ -2,5 +2,5 @@ class AppointementBlueprint < Blueprinter::Base
   identifier :id
   fields :title, :start_time, :end_time
 
-  association :notes, blueprint: NoteBlueprint
+  association :note, blueprint: NoteBlueprint
 end
