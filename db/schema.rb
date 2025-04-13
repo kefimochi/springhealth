@@ -22,7 +22,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_12_152130) do
   create_table "notes", force: :cascade do |t|
     t.string "title", null: false
     t.string "status", null: false
-    t.integer "appointement_id", null: false
+    t.integer "appointement_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["appointement_id"], name: "index_notes_on_appointement_id"
@@ -30,7 +30,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_12_152130) do
 
   create_table "sections", force: :cascade do |t|
     t.string "text", null: false
-    t.integer "note_id", null: false
+    t.integer "note_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["note_id"], name: "index_sections_on_note_id"
