@@ -14,16 +14,32 @@ class AppointementsController < ActionController::Base
   end
 
   def create
-    @appointement = Appointement.create!(appointement_params)
-    render json: AppointementBlueprint.render(@appointement)
+    unless has_conflicts?(appointement_params)
+      @appointement = Appointement.create!(appointement_params)
+      render json: AppointementBlueprint.render(@appointement)
+    else
+      payload = {
+        error: "Cant schedule with a meeting overlap!",
+        status: 400
+      }
+      render :json => payload, :status => :bad_request
+    end
   end
 
   def update
     id = params.extract_value(:id)
     @appointement = Appointement.find_by! id: id
 
-    @appointement.update!(appointement_params) if can_schedule?
-    render json: AppointementBlueprint.render(@appointement)
+    unless has_conflicts?(appointement_params)
+      @appointement.update!(appointement_params)
+      render json: AppointementBlueprint.render(@appointement)
+    else
+      payload = {
+        error: "Cant schedule with a meeting overlap!",
+        status: 400
+      }
+      render :json => payload, :status => :bad_request
+    end
   end
 
   private
@@ -32,14 +48,26 @@ class AppointementsController < ActionController::Base
     params.expect(appointement: [:title, :start_time, :end_time])
   end
 
-  def can_schedule?
+  def has_conflicts?(incoming)
     # Couldn't think of a way to accomplish early return using active records, sadly
     has_conflicts = false
+
     Appointement.all.each do |app|
-      if app.start_time > @appointement.end_time || app.end_time < @appointement.start_time
+      app_start_time = app.start_time.to_datetime
+      app_end_time = app.end_time.to_datetime
+      incoming_start_time = DateTime.parse(incoming[:start_time].to_s)
+      incoming_end_time = DateTime.parse(incoming[:end_time].to_s)
+
+      if app_start_time == incoming_start_time || app_end_time == incoming_end_time
+        has_conflicts = true
+        break 
+      end
+
+      if (app_start_time < incoming_end_time && incoming_end_time < app_end_time) || (app_end_time > incoming_start_time && incoming_start_time > app_start_time)
         has_conflicts = true
         break 
       end
     end
+    has_conflicts
   end
 end
