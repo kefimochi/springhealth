@@ -29,6 +29,6 @@ class SectionsController < ActionController::Base
   private
 
   def sections_params
-    params.expect(section: [:text])
+    params.expect(section: [:text, :note_id])
   end
 end

@@ -11,20 +11,47 @@ Testing directions:
 
 Creating an appointment
 
-Using `http://localhost:3000/appointements` as the base, add url parameters for appointement[title], appointement[start_time], appointement[end_time] similar to screenshot. The reason we do this syntax is because controllers expect an object, and this is the syntax Insomnia uses to support that. Note that the notes is [] because its possible to have an appointement where notes haven't started yet.
+- Using `http://localhost:3000/appointements` as the base, add url parameters for appointement[title], appointement[start_time], appointement[end_time] similar to screenshot. The reason we do this syntax is because controllers expect an object, and this is the syntax Insomnia uses to support that. Note that the notes is [] because its possible to have an appointement where notes haven't started yet. For easy copy & paste the values I used are `2025-04-12T07:00:00+00:00` and `2025-04-12T10:00:00+00:00`.
 
 ![Creating an appointment](screenshots/appointment_create.png)
 
-Attempting to edit an appointment when there is a scheduling overlap
+Attempting to create an appointment when there is a scheduling overlap
 
-Updating a no-confluct appointment
+- Alright now lets try to send it again w/o changes, that should easily fill the criteria for overlap. It will return an error `Cant schedule with a meeting overlap!`.
+- Now something more complicated, use appointement[start_time] as `2025-04-12T08:00:00+00:00` and appointement[end_time] as `2025-04-12T11:00:00+00:00`
+
+![Appointment overlap](screenshots/appointement_overlap.png)
+
+Updating a no-conflict appointment
+
+- Switch from Post to Put. Use appointement[start_time] as `2025-04-12T22:00:00+00:00` and appointement[end_time] as `2025-04-12T23:00:00+00:00`
 
 Creating a note
 
+- Set a POST to `http://localhost:3000/appointements/1/notes`, configure `note[title]`, `note[status]` and `note[appointement_id]` similar to the screenshot
+
+![Create note](screenshots/create_note.png)
+
 Making the note signed
+
+- As part of the PUT request you can set the status to be Signed.
+
+![Note signed](screenshots/note_signed.png)
 
 Attempting to edit a signed note
 
-Updating a draft note
+- Now that the note is signed, it wont allow any editing.
 
 Creating a section
+
+- There are other methods for the note & section as well, but I figured no need to go that deep :D Here's the last instruction!
+
+![Section create](screenshots/section_create.png)
+
+The final stucture would then look like
+
+![Final object structure](screenshots/final.png)
+
+Post-thoughts
+
+- I spent 13+ hours on this 🙈. It was certainly a challenge! For one RoR environment setup was a beast, after which the appointement logic was very challenging for me. Its likely still not perfect but I'm prioritizing giving it a shot anyway! I really enjoyed meeting everyone on the team. So what kept me motivated is the thought of being able to join the company of such amazing and kind individuals <3

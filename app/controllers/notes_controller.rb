@@ -22,14 +22,22 @@ class NotesController < ActionController::Base
     id = params.extract_value(:id)
     @note = Note.find_by! id: id
 
-    @note.update!(note_params) if can_update?
-    render json: NoteBlueprint.render(@note)
+    if can_update?
+      @note.update!(note_params) if can_update?
+      render json: NoteBlueprint.render(@note)
+    else
+      payload = {
+        error: "Cant update after no longer being Draft",
+        status: 400
+      }
+      render :json => payload, :status => :bad_request
+    end
   end
 
   private
 
   def note_params
-    params.expect(notes: [:title, :status])
+    params.expect(note: [:title, :status, :appointement_id])
   end
 
   def can_update?
