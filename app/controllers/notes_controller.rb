@@ -29,7 +29,7 @@ class NotesController < ActionController::Base
   private
 
   def note_params
-    params.expect(notes: [:title, :start_time, :end_time])
+    params.expect(notes: [:title, :status])
   end
 
   def can_update?
