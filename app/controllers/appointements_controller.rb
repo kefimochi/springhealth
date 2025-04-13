@@ -14,7 +14,6 @@ class AppointementsController < ActionController::Base
   end
 
   def create
-    puts appointement_params[:start_time]
     @appointement = Appointement.create!(appointement_params)
     render json: AppointementBlueprint.render(@appointement)
   end
@@ -34,8 +33,13 @@ class AppointementsController < ActionController::Base
   end
 
   def can_schedule?
-    puts @appointement
-    puts Appointement.all.inspect
-    puts "hello world"
+    # Couldn't think of a way to accomplish early return using active records, sadly
+    has_conflicts = false
+    Appointement.all.each do |app|
+      if app.start_time > @appointement.end_time || app.end_time < @appointement.start_time
+        has_conflicts = true
+        break 
+      end
+    end
   end
 end
