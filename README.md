@@ -54,4 +54,4 @@ The final stucture would then look like
 
 Post-thoughts
 
-- I spent 13+ hours on this 🙈. It was certainly a challenge! For one RoR environment setup was a beast, after which the appointement logic was very challenging for me. Its likely still not perfect but I'm prioritizing giving it a shot anyway! I really enjoyed meeting everyone on the team. So what kept me motivated is the thought of being able to join the company of such amazing and kind individuals <3
+- I spent 13+ hours on this 🙈. It was certainly a challenge! For one RoR environment setup was a beast, after which the appointement logic was very challenging for me. Its likely still not perfect but I'm prioritizing giving it a shot anyway! 
