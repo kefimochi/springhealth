@@ -20,7 +20,7 @@ class Note < ApplicationRecord
   end
 
   def status_correct
-    if !(self.status.eql? 'Draft') && !(self.status.eql? 'Signed')
+    unless (self.status.eql? 'Draft') && (self.status.eql? 'Signed')
       errors.add(:status, ' cannot be asigned to this value')
     end
   end
