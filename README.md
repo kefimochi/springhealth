@@ -1,5 +1,9 @@
 # SpringHealth Challenge
 
+The original challenge
+
+- Create appointements that won't allow overlapping schedule. Each appointement should have a note, that if "signed" cannot be edited. Each note is then allowed to have multiple sections within it, just regular text storage there.
+
 Testing directions:
 
 - Setup your environemnt, starting with `bundle install`. During my development, I encountered failing bundle builds due to outdated bundler so `sudo bundle update --bundler` was also helpful.
