@@ -52,6 +52,3 @@ The final stucture would then look like
 
 ![Final object structure](screenshots/final.png)
 
-Post-thoughts
-
-- I spent 13+ hours on this 🙈. It was certainly a challenge! For one RoR environment setup was a beast, after which the appointement logic was very challenging for me. Its likely still not perfect but I'm prioritizing giving it a shot anyway! 
